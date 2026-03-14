@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Browse Jobs – TalentBridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo"><a href="index.html" style="text-decoration:none;color:inherit">Talent<span>Bridge</span></a></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="jobs.html" class="active">Jobs</a></li>
+    <li><a href="apply.html">Apply</a></li>
+    <li><a href="login.html">Login</a></li>
+    <li><a href="register.html" class="btn-nav">Get Started</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="toggleNav()">☰</button>
+</nav>
+
+<div class="page-header">
+  <h1>Browse <em>Open Positions</em></h1>
+  <p>Find the role that matches your skills and ambition</p>
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search job title or skill…" oninput="filterJobs()"/>
+    <select id="filterRole" onchange="filterJobs()">
+      <option value="">All Roles</option>
+      <option>Java Developer</option>
+      <option>Python Developer</option>
+      <option>Web Developer</option>
+      <option>UI/UX Designer</option>
+      <option>Data Analyst</option>
+    </select>
+    <select id="filterType" onchange="filterJobs()">
+      <option value="">All Types</option>
+      <option>Remote</option>
+      <option>Hybrid</option>
+      <option>On-site</option>
+    </select>
+  </div>
+</div>
+
+<main class="jobs-main">
+  <div id="jobCount" class="job-count">Showing 5 jobs</div>
+  <div class="jobs-list" id="jobsList">
+
+    <div class="job-row" data-role="Java Developer" data-type="Remote">
+      <div class="job-row-icon">☕</div>
+      <div class="job-row-info">
+        <h3>Java Developer</h3>
+        <div class="job-row-meta"><span>🏢 TechCorp Pvt Ltd</span><span>📍 Remote / Hyderabad</span><span>💰 ₹8–18 LPA</span><span>🕒 2–5 yrs</span></div>
+        <p>Build scalable enterprise applications using Java, Spring Boot and Microservices architecture. Work with a high-growth fintech team.</p>
+        <div class="job-tags"><span>Java</span><span>Spring Boot</span><span>Microservices</span><span>SQL</span></div>
+      </div>
+      <div class="job-row-actions">
+        <div class="job-badge">Remote</div>
+        <a href="apply.html?role=Java+Developer" class="btn-apply">Apply →</a>
+      </div>
+    </div>
+
+    <div class="job-row" data-role="Python Developer" data-type="Hybrid">
+      <div class="job-row-icon">🐍</div>
+      <div class="job-row-info">
+        <h3>Python Developer</h3>
+        <div class="job-row-meta"><span>🏢 DataFlow Systems</span><span>📍 Bangalore</span><span>💰 ₹10–22 LPA</span><span>🕒 1–3 yrs</span></div>
+        <p>Develop data pipelines, REST APIs and ML integrations using Python, Django and FastAPI. Collaborative team, flexible hours.</p>
+        <div class="job-tags"><span>Python</span><span>Django</span><span>FastAPI</span><span>Docker</span></div>
+      </div>
+      <div class="job-row-actions">
+        <div class="job-badge job-badge--hot">🔥 Hot</div>
+        <a href="apply.html?role=Python+Developer" class="btn-apply">Apply →</a>
+      </div>
+    </div>
+
+    <div class="job-row" data-role="Web Developer" data-type="Hybrid">
+      <div class="job-row-icon">🌐</div>
+      <div class="job-row-info">
+        <h3>Web Developer</h3>
+        <div class="job-row-meta"><span>🏢 StartupXYZ</span><span>📍 Mumbai</span><span>💰 ₹6–15 LPA</span><span>🕒 1–4 yrs</span></div>
+        <p>Create pixel-perfect responsive UIs using HTML5, CSS3, JavaScript and React. MERN stack experience is a big plus.</p>
+        <div class="job-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>React</span></div>
+      </div>
+      <div class="job-row-actions">
+        <div class="job-badge">Hybrid</div>
+        <a href="apply.html?role=Web+Developer" class="btn-apply">Apply →</a>
+      </div>
+    </div>
+
+    <div class="job-row" data-role="UI/UX Designer" data-type="On-site">
+      <div class="job-row-icon">🎨</div>
+      <div class="job-row-info">
+        <h3>UI/UX Designer</h3>
+        <div class="job-row-meta"><span>🏢 DesignHub</span><span>📍 Pune</span><span>💰 ₹7–16 LPA</span><span>🕒 2–4 yrs</span></div>
+        <p>Design intuitive, beautiful interfaces using Figma. Conduct user research, build wireframes and high-fidelity prototypes.</p>
+        <div class="job-tags"><span>Figma</span><span>Wireframing</span><span>Prototyping</span><span>User Research</span></div>
+      </div>
+      <div class="job-row-actions">
+        <div class="job-badge">On-site</div>
+        <a href="apply.html?role=UI%2FUX+Designer" class="btn-apply">Apply →</a>
+      </div>
+    </div>
+
+    <div class="job-row" data-role="Data Analyst" data-type="Remote">
+      <div class="job-row-icon">📊</div>
+      <div class="job-row-info">
+        <h3>Data Analyst</h3>
+        <div class="job-row-meta"><span>🏢 FinTech Solutions</span><span>📍 Remote</span><span>💰 ₹6–14 LPA</span><span>🕒 1–3 yrs</span></div>
+        <p>Translate raw data into business insights using SQL, Python and Power BI. Build dashboards that drive decisions.</p>
+        <div class="job-tags"><span>SQL</span><span>Python</span><span>Power BI</span><span>Excel</span></div>
+      </div>
+      <div class="job-row-actions">
+        <div class="job-badge">Remote</div>
+        <a href="apply.html?role=Data+Analyst" class="btn-apply">Apply →</a>
+      </div>
+    </div>
+
+    <div id="noResults" class="no-results hidden">
+      <div style="font-size:3rem">🔍</div>
+      <h3>No jobs found</h3>
+      <p>Try a different search term or filter.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-bottom"><p>© 2025 TalentBridge. All rights reserved.</p></div>
+</footer>
+
+<script>
+  function toggleNav() { document.querySelector('.nav-links').classList.toggle('open'); }
+
+  // Pre-fill from URL
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('search')) document.getElementById('searchInput').value = params.get('search');
+
+  function filterJobs() {
+    const q    = document.getElementById('searchInput').value.toLowerCase();
+    const role = document.getElementById('filterRole').value.toLowerCase();
+    const type = document.getElementById('filterType').value.toLowerCase();
+    const rows = document.querySelectorAll('.job-row');
+    let count  = 0;
+
+    rows.forEach(row => {
+      const text = row.textContent.toLowerCase();
+      const matchQ    = !q    || text.includes(q);
+      const matchRole = !role || row.dataset.role.toLowerCase().includes(role);
+      const matchType = !type || row.dataset.type.toLowerCase() === type;
+      const show = matchQ && matchRole && matchType;
+      row.style.display = show ? '' : 'none';
+      if (show) count++;
+    });
+
+    document.getElementById('jobCount').textContent = `Showing ${count} job${count !== 1 ? 's' : ''}`;
+    document.getElementById('noResults').classList.toggle('hidden', count > 0);
+  }
+
+  filterJobs();
+</script>
+</body>
+</html>

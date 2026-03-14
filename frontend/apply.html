@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Apply – TalentBridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo"><a href="index.html" style="text-decoration:none;color:inherit">Talent<span>Bridge</span></a></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="jobs.html">Jobs</a></li>
+    <li><a href="apply.html" class="active">Apply</a></li>
+    <li><a href="login.html">Login</a></li>
+    <li><a href="register.html" class="btn-nav">Get Started</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="toggleNav()">☰</button>
+</nav>
+
+<div class="auth-page">
+  <div class="auth-card auth-card--wide">
+    <div class="auth-header">
+      <div class="auth-icon">📋</div>
+      <h1>Job Application</h1>
+      <p>Fill in your details and we'll get back to you shortly.</p>
+    </div>
+
+    <div id="formMsg" class="alert hidden"></div>
+
+    <form id="applyForm" novalidate>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fullName">Full Name <span class="req">*</span></label>
+          <input type="text" id="fullName" name="fullName" placeholder="Arjun Kumar" required/>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address <span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="arjun@email.com" required/>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone">Phone Number <span class="req">*</span></label>
+          <input type="tel" id="phone" name="phone" placeholder="+91 9876543210" required/>
+        </div>
+        <div class="form-group">
+          <label for="jobRole">Applying For <span class="req">*</span></label>
+          <select id="jobRole" name="jobRole" required>
+            <option value="">Select Job Role</option>
+            <option value="Java Developer">Java Developer</option>
+            <option value="Python Developer">Python Developer</option>
+            <option value="Web Developer">Web Developer</option>
+            <option value="UI/UX Designer">UI/UX Designer</option>
+            <option value="Data Analyst">Data Analyst</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="skills">Skills <span class="req">*</span></label>
+        <textarea id="skills" name="skills" rows="3"
+          placeholder="e.g. Java, Spring Boot, SQL, REST APIs, Git…" required></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="experience">Years of Experience <span class="req">*</span></label>
+          <input type="number" id="experience" name="experience" min="0" max="50" placeholder="2" required/>
+        </div>
+        <div class="form-group">
+          <label for="resume">Resume (PDF only, max 5 MB) <span class="req">*</span></label>
+          <input type="file" id="resume" name="resume" accept=".pdf" required/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="coverLetter">Cover Letter <span class="opt">(optional)</span></label>
+        <textarea id="coverLetter" name="coverLetter" rows="4"
+          placeholder="Tell us why you're the perfect fit for this role…"></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit" id="submitBtn">
+        <span id="submitText">Submit Application →</span>
+      </button>
+
+    </form>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-bottom"><p>© 2025 TalentBridge. All rights reserved.</p></div>
+</footer>
+
+<script>
+  function toggleNav() { document.querySelector('.nav-links').classList.toggle('open'); }
+
+  // Pre-select role from URL
+  (function() {
+    const role = new URLSearchParams(window.location.search).get('role');
+    if (role) {
+      const sel = document.getElementById('jobRole');
+      [...sel.options].forEach(o => { if (o.value === role) o.selected = true; });
+    }
+  })();
+
+  document.getElementById('applyForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn      = document.getElementById('submitBtn');
+    const msgEl    = document.getElementById('formMsg');
+    msgEl.className = 'alert hidden';
+
+    const fullName   = document.getElementById('fullName').value.trim();
+    const email      = document.getElementById('email').value.trim();
+    const phone      = document.getElementById('phone').value.trim();
+    const jobRole    = document.getElementById('jobRole').value;
+    const skills     = document.getElementById('skills').value.trim();
+    const experience = document.getElementById('experience').value;
+    const resumeFile = document.getElementById('resume').files[0];
+
+    if (!fullName || !email || !phone || !jobRole || !skills || experience === '' || !resumeFile) {
+      return showAlert('Please fill in all required fields and attach your PDF resume.', 'error');
+    }
+
+    const fd = new FormData();
+    fd.append('fullName',    fullName);
+    fd.append('email',       email);
+    fd.append('phone',       phone);
+    fd.append('jobRole',     jobRole);
+    fd.append('skills',      skills);
+    fd.append('experience',  experience);
+    fd.append('coverLetter', document.getElementById('coverLetter').value.trim());
+    fd.append('resume',      resumeFile);
+
+    btn.disabled = true;
+    document.getElementById('submitText').textContent = 'Submitting…';
+
+    try {
+      const res  = await fetch('/api/apply', { method: 'POST', body: fd });
+      const data = await res.json();
+      if (res.ok) {
+        showAlert('✅ ' + data.message, 'success');
+        document.getElementById('applyForm').reset();
+      } else {
+        showAlert('❌ ' + data.message, 'error');
+      }
+    } catch {
+      showAlert('❌ Network error. Make sure the server is running at http://localhost:3000', 'error');
+    } finally {
+      btn.disabled = false;
+      document.getElementById('submitText').textContent = 'Submit Application →';
+    }
+  });
+
+  function showAlert(text, type) {
+    const el = document.getElementById('formMsg');
+    el.textContent = text;
+    el.className = 'alert alert--' + type;
+    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
+</body>
+</html>

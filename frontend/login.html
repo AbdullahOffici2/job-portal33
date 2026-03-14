@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login – TalentBridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo"><a href="index.html" style="text-decoration:none;color:inherit">Talent<span>Bridge</span></a></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="jobs.html">Jobs</a></li>
+    <li><a href="apply.html">Apply</a></li>
+    <li><a href="login.html" class="active">Login</a></li>
+    <li><a href="register.html" class="btn-nav">Get Started</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="toggleNav()">☰</button>
+</nav>
+
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="auth-icon">👋</div>
+      <h1>Welcome back</h1>
+      <p>Sign in to your TalentBridge account</p>
+    </div>
+
+    <div id="formMsg" class="alert hidden"></div>
+
+    <form id="loginForm" novalidate>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="arjun@email.com" required/>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="••••••••" required/>
+      </div>
+      <button type="submit" class="btn-submit" id="loginBtn">
+        <span id="loginText">Sign In →</span>
+      </button>
+    </form>
+
+    <p class="auth-switch">Don't have an account? <a href="register.html">Create one free →</a></p>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-bottom"><p>© 2025 TalentBridge. All rights reserved.</p></div>
+</footer>
+
+<script>
+  function toggleNav() { document.querySelector('.nav-links').classList.toggle('open'); }
+
+  document.getElementById('loginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn   = document.getElementById('loginBtn');
+    const email    = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    if (!email || !password) return showAlert('Please enter your email and password.', 'error');
+
+    btn.disabled = true;
+    document.getElementById('loginText').textContent = 'Signing in…';
+
+    try {
+      const res  = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        showAlert('✅ ' + data.message + ' Redirecting…', 'success');
+        setTimeout(() => window.location.href = 'index.html', 1500);
+      } else {
+        showAlert('❌ ' + data.message, 'error');
+      }
+    } catch {
+      showAlert('❌ Network error. Make sure the server is running at http://localhost:3000', 'error');
+    } finally {
+      btn.disabled = false;
+      document.getElementById('loginText').textContent = 'Sign In →';
+    }
+  });
+
+  function showAlert(text, type) {
+    const el = document.getElementById('formMsg');
+    el.textContent = text;
+    el.className = 'alert alert--' + type;
+  }
+</script>
+</body>
+</html>

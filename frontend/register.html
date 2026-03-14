@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register – TalentBridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo"><a href="index.html" style="text-decoration:none;color:inherit">Talent<span>Bridge</span></a></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="jobs.html">Jobs</a></li>
+    <li><a href="apply.html">Apply</a></li>
+    <li><a href="login.html">Login</a></li>
+    <li><a href="register.html" class="btn-nav active">Get Started</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="toggleNav()">☰</button>
+</nav>
+
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="auth-icon">🚀</div>
+      <h1>Create account</h1>
+      <p>Join 48,000+ professionals on TalentBridge</p>
+    </div>
+
+    <div id="formMsg" class="alert hidden"></div>
+
+    <form id="registerForm" novalidate>
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Arjun Kumar" required/>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="arjun@email.com" required/>
+      </div>
+      <div class="form-group">
+        <label for="password">Password <span class="opt">(min 6 characters)</span></label>
+        <input type="password" id="password" name="password" placeholder="••••••••" minlength="6" required/>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••" required/>
+      </div>
+      <button type="submit" class="btn-submit" id="registerBtn">
+        <span id="registerText">Create Account →</span>
+      </button>
+    </form>
+
+    <p class="auth-switch">Already have an account? <a href="login.html">Sign in →</a></p>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-bottom"><p>© 2025 TalentBridge. All rights reserved.</p></div>
+</footer>
+
+<script>
+  function toggleNav() { document.querySelector('.nav-links').classList.toggle('open'); }
+
+  document.getElementById('registerForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn     = document.getElementById('registerBtn');
+    const name     = document.getElementById('name').value.trim();
+    const email    = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const confirm  = document.getElementById('confirmPassword').value;
+
+    if (!name || !email || !password || !confirm) return showAlert('All fields are required.', 'error');
+    if (password.length < 6) return showAlert('Password must be at least 6 characters.', 'error');
+    if (password !== confirm) return showAlert('Passwords do not match.', 'error');
+
+    btn.disabled = true;
+    document.getElementById('registerText').textContent = 'Creating account…';
+
+    try {
+      const res  = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        showAlert('✅ ' + data.message, 'success');
+        setTimeout(() => window.location.href = 'login.html', 2000);
+      } else {
+        showAlert('❌ ' + data.message, 'error');
+      }
+    } catch {
+      showAlert('❌ Network error. Make sure the server is running at http://localhost:3000', 'error');
+    } finally {
+      btn.disabled = false;
+      document.getElementById('registerText').textContent = 'Create Account →';
+    }
+  });
+
+  function showAlert(text, type) {
+    const el = document.getElementById('formMsg');
+    el.textContent = text;
+    el.className = 'alert alert--' + type;
+  }
+</script>
+</body>
+</html>

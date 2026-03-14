@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TalentBridge – Find Your Next Role</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="nav">
+  <div class="nav-logo">Talent<span>Bridge</span></div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="jobs.html">Jobs</a></li>
+    <li><a href="apply.html">Apply</a></li>
+    <li><a href="login.html">Login</a></li>
+    <li><a href="register.html" class="btn-nav">Get Started</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="toggleNav()">☰</button>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">🚀 500+ Companies Hiring Now</div>
+    <h1 class="hero-title">
+      Your next big<br/>
+      <em>career move</em><br/>
+      starts here.
+    </h1>
+    <p class="hero-sub">Connect with top companies. Land interviews faster. Build the career you deserve.</p>
+    <div class="hero-search">
+      <input type="text" id="heroSearch" placeholder="Job title, skills or company…"/>
+      <a href="jobs.html" class="btn-primary" id="heroSearchBtn">Search Jobs →</a>
+    </div>
+    <div class="hero-tags">
+      <span onclick="goSearch('Java Developer')">Java Developer</span>
+      <span onclick="goSearch('Python Developer')">Python Developer</span>
+      <span onclick="goSearch('Web Developer')">Web Developer</span>
+      <span onclick="goSearch('Data Analyst')">Data Analyst</span>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="card-float card-f1">
+      <div class="cf-icon">☕</div>
+      <div>
+        <div class="cf-title">Java Developer</div>
+        <div class="cf-sub">TechCorp · Remote</div>
+      </div>
+      <div class="cf-badge">New</div>
+    </div>
+    <div class="card-float card-f2">
+      <div class="cf-icon">🐍</div>
+      <div>
+        <div class="cf-title">Python Engineer</div>
+        <div class="cf-sub">DataFlow · Hyderabad</div>
+      </div>
+      <div class="cf-badge">Hot</div>
+    </div>
+    <div class="card-float card-f3">
+      <div class="cf-icon">🌐</div>
+      <div>
+        <div class="cf-title">Web Developer</div>
+        <div class="cf-sub">StartupXYZ · Bangalore</div>
+      </div>
+      <div class="cf-badge">Urgent</div>
+    </div>
+    <div class="stats-pill">
+      <span><strong>12k+</strong> Jobs</span>
+      <span><strong>500+</strong> Companies</span>
+      <span><strong>98%</strong> Placed</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS ── -->
+<section class="stats-section">
+  <div class="stat-item">
+    <div class="stat-num" data-target="12000">0</div>
+    <div class="stat-label">Open Positions</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-target="500">0</div>
+    <div class="stat-label">Partner Companies</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-target="48000">0</div>
+    <div class="stat-label">Candidates Placed</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-target="98">0</div>
+    <div class="stat-label">% Satisfaction Rate</div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="how-section">
+  <div class="section-label">How It Works</div>
+  <h2 class="section-title">Land your job in 3 steps</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-icon">📝</div>
+      <h3>Create Profile</h3>
+      <p>Register and build your professional profile in minutes. Showcase your skills and experience.</p>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-icon">🔍</div>
+      <h3>Browse & Apply</h3>
+      <p>Explore curated job listings matched to your skills. Apply with one click — no repetitive forms.</p>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-icon">🎉</div>
+      <h3>Get Hired</h3>
+      <p>Our team connects you directly with hiring managers. Interview prep included.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURED JOBS ── -->
+<section class="featured-section">
+  <div class="section-label">Featured Roles</div>
+  <h2 class="section-title">Trending opportunities</h2>
+  <div class="featured-grid">
+    <div class="feat-card">
+      <div class="feat-header">
+        <div class="feat-logo">☕</div>
+        <div class="feat-tag">Remote</div>
+      </div>
+      <h3>Java Developer</h3>
+      <p>Build enterprise-grade apps with Spring Boot & Microservices.</p>
+      <div class="feat-meta">
+        <span>💰 ₹8–18 LPA</span>
+        <span>📍 Remote / Hyderabad</span>
+      </div>
+      <a href="apply.html?role=Java+Developer" class="feat-apply">Apply Now →</a>
+    </div>
+    <div class="feat-card feat-card--highlight">
+      <div class="feat-header">
+        <div class="feat-logo">🐍</div>
+        <div class="feat-tag feat-tag--hot">🔥 Hot</div>
+      </div>
+      <h3>Python Developer</h3>
+      <p>Data pipelines, ML integration, FastAPI & Django applications.</p>
+      <div class="feat-meta">
+        <span>💰 ₹10–22 LPA</span>
+        <span>📍 Bangalore</span>
+      </div>
+      <a href="apply.html?role=Python+Developer" class="feat-apply">Apply Now →</a>
+    </div>
+    <div class="feat-card">
+      <div class="feat-header">
+        <div class="feat-logo">🌐</div>
+        <div class="feat-tag">Hybrid</div>
+      </div>
+      <h3>Web Developer</h3>
+      <p>Responsive UIs using React, HTML5, CSS3 & modern JS frameworks.</p>
+      <div class="feat-meta">
+        <span>💰 ₹6–15 LPA</span>
+        <span>📍 Mumbai</span>
+      </div>
+      <a href="apply.html?role=Web+Developer" class="feat-apply">Apply Now →</a>
+    </div>
+    <div class="feat-card">
+      <div class="feat-header">
+        <div class="feat-logo">🎨</div>
+        <div class="feat-tag">On-site</div>
+      </div>
+      <h3>UI/UX Designer</h3>
+      <p>Design intuitive interfaces with Figma. User research & prototyping.</p>
+      <div class="feat-meta">
+        <span>💰 ₹7–16 LPA</span>
+        <span>📍 Pune</span>
+      </div>
+      <a href="apply.html?role=UI%2FUX+Designer" class="feat-apply">Apply Now →</a>
+    </div>
+    <div class="feat-card">
+      <div class="feat-header">
+        <div class="feat-logo">📊</div>
+        <div class="feat-tag">Remote</div>
+      </div>
+      <h3>Data Analyst</h3>
+      <p>Translate data into insights using SQL, Python & Power BI dashboards.</p>
+      <div class="feat-meta">
+        <span>💰 ₹6–14 LPA</span>
+        <span>📍 Remote</span>
+      </div>
+      <a href="apply.html?role=Data+Analyst" class="feat-apply">Apply Now →</a>
+    </div>
+    <div class="feat-card feat-card--cta">
+      <div class="feat-cta-inner">
+        <div style="font-size:2.5rem">💼</div>
+        <h3>Don't see your role?</h3>
+        <p>Browse all 12,000+ open positions across every industry.</p>
+        <a href="jobs.html" class="btn-primary">View All Jobs →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonials-section">
+  <div class="section-label">Success Stories</div>
+  <h2 class="section-title">People who found their dream jobs</h2>
+  <div class="testimonials-grid">
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <p>TalentBridge connected me with a great company in just 2 weeks. The process was seamless and the team was incredibly supportive throughout.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">AK</div>
+        <div>
+          <strong>Arjun Kumar</strong>
+          <span>Java Developer @ TechCorp</span>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card testi-card--dark">
+      <div class="testi-quote">"</div>
+      <p>I'd been job hunting for months before TalentBridge. Within 3 weeks I had 4 interviews and 2 offers. Absolutely recommend!</p>
+      <div class="testi-author">
+        <div class="testi-avatar">PS</div>
+        <div>
+          <strong>Priya Sharma</strong>
+          <span>Data Analyst @ FinTech Solutions</span>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <p>The resume upload feature and one-click apply saved me so much time. Got placed as a Web Developer at my dream startup!</p>
+      <div class="testi-author">
+        <div class="testi-avatar">RV</div>
+        <div>
+          <strong>Rahul Verma</strong>
+          <span>Web Developer @ StartupXYZ</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA BANNER ── -->
+<section class="cta-banner">
+  <div class="cta-content">
+    <h2>Ready to find your next opportunity?</h2>
+    <p>Join 48,000+ professionals who found their dream job through TalentBridge.</p>
+    <div class="cta-btns">
+      <a href="register.html" class="btn-primary">Create Free Account</a>
+      <a href="jobs.html" class="btn-outline">Browse Jobs</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo">Talent<span>Bridge</span></div>
+      <p>Connecting great people with great companies since 2024.</p>
+    </div>
+    <div class="footer-links">
+      <div>
+        <strong>Platform</strong>
+        <a href="jobs.html">Browse Jobs</a>
+        <a href="apply.html">Apply</a>
+        <a href="register.html">Sign Up</a>
+      </div>
+      <div>
+        <strong>Account</strong>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 TalentBridge. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // Nav toggle
+  function toggleNav() {
+    document.querySelector('.nav-links').classList.toggle('open');
+  }
+
+  // Hero search
+  function goSearch(role) {
+    document.getElementById('heroSearch').value = role;
+    window.location.href = 'jobs.html?search=' + encodeURIComponent(role);
+  }
+  document.getElementById('heroSearchBtn').addEventListener('click', function(e) {
+    const q = document.getElementById('heroSearch').value.trim();
+    if (q) { e.preventDefault(); window.location.href = 'jobs.html?search=' + encodeURIComponent(q); }
+  });
+
+  // Animated counters
+  function animateCounters() {
+    document.querySelectorAll('.stat-num').forEach(el => {
+      const target = +el.dataset.target;
+      const duration = 1800;
+      const step = target / (duration / 16);
+      let current = 0;
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = Math.floor(current).toLocaleString() + (target >= 100 && el.dataset.target == 98 ? '%' : '+');
+        if (current >= target) clearInterval(timer);
+      }, 16);
+    });
+  }
+  const statsObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) { animateCounters(); statsObs.disconnect(); }
+  }, { threshold: 0.3 });
+  statsObs.observe(document.querySelector('.stats-section'));
+</script>
+</body>
+</html>
